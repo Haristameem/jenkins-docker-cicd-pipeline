@@ -11,15 +11,15 @@ pipeline {
 
         stage('Build Docker Image') {
             steps {
-                bat 'docker build -t devops-cicd-app .'
+                bat 'docker build -t jenkins-docker-app .'
             }
         }
 
         stage('Run Docker Container') {
             steps {
-                bat 'docker stop devops-cicd-container || exit 0'
-                bat 'docker rm devops-cicd-container || exit 0'
-                bat 'docker run -d -p 8080:80 --name devops-cicd-container devops-cicd-app'
+                bat 'docker stop jenkins-docker-app || exit /b 0'
+                bat 'docker rm jenkins-docker-app || exit /b 0'
+                bat 'docker run -d -p 8081:80 --name jenkins-docker-app jenkins-docker-app'
             }
         }
     }
