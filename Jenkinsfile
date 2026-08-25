@@ -5,7 +5,8 @@ pipeline {
 
         stage('Clone') {
             steps {
-                git 'https://github.com/Haristameem/jenkins-docker-cicd-pipeline.git'
+                git branch: 'main',
+                    url: 'https://github.com/Haristameem/jenkins-docker-cicd-pipeline.git'
             }
         }
 
@@ -17,9 +18,7 @@ pipeline {
 
         stage('Run Docker Container') {
             steps {
-                bat 'docker stop jenkins-docker-app || exit /b 0'
-                bat 'docker rm jenkins-docker-app || exit /b 0'
-                bat 'docker run -d -p 8081:80 --name jenkins-docker-app jenkins-docker-app'
+                bat 'docker run -d -p 8081:80 jenkins-docker-app'
             }
         }
     }
